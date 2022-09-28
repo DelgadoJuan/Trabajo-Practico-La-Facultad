@@ -1,9 +1,7 @@
 package com.company.entity;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Materia implements Informacion {
     private String nombre;
@@ -16,6 +14,30 @@ public class Materia implements Informacion {
         this.coleccionEstudiantes = coleccionEstudiantes;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Profesor getTitular() {
+        return titular;
+    }
+
+    public void setTitular(Profesor titular) {
+        this.titular = titular;
+    }
+
+    public List<Estudiante> getColeccionEstudiantes() {
+        return coleccionEstudiantes;
+    }
+
+    public void setColeccionEstudiantes(List<Estudiante> coleccionEstudiantes) {
+        this.coleccionEstudiantes = coleccionEstudiantes;
+    }
+
     @Override
     public int verCantidad() {
         return coleccionEstudiantes.size();
@@ -23,6 +45,20 @@ public class Materia implements Informacion {
 
     @Override
     public String listarContenidos() {
-        return null;
+        StringBuilder cadena = new StringBuilder();
+        coleccionEstudiantes.sort((Comparator.comparing(Estudiante::toString)));
+        for (Estudiante estudiante: coleccionEstudiantes) {
+            cadena.append(estudiante.toString()).append("\n");
+        }
+        return String.valueOf(cadena);
+    }
+
+    @Override
+    public String toString() {
+        return "Materia{" +
+                "nombre='" + nombre + '\'' +
+                ", titular=" + titular +
+                ", coleccionEstudiantes=" + coleccionEstudiantes +
+                '}';
     }
 }
