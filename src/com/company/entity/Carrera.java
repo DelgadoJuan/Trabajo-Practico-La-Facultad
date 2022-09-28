@@ -2,6 +2,7 @@ package com.company.entity;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Carrera implements Informacion{
     private String nombre;
@@ -49,5 +50,19 @@ public class Carrera implements Informacion{
                 "nombre='" + nombre + '\'' +
                 ", coleccionMaterias=" + coleccionMaterias +
                 '}';
+    }
+
+    public void encontrarMateria(String nombreMateria){
+        for(Materia materia: coleccionMaterias){
+            if (materia.equals(nombreMateria)){
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Se encontro la materia ¿Desea eliminarla? s/n:");
+                String opcion = scanner.nextLine();
+                if (opcion.equals("s")){
+                    coleccionMaterias.remove(materia);
+                    System.out.print("Se eliminó la materia con éxito");
+                }
+            }
+        }
     }
 }

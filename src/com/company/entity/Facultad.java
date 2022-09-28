@@ -50,4 +50,27 @@ public class Facultad implements Informacion {
                 ", coleccionCarreras=" + coleccionCarreras +
                 '}';
     }
+
+    public void agregarCarrera(Carrera carrera){
+        coleccionCarreras.add(carrera);
+    }
+    public void eliminarCarrera(String nombreCarrera){
+
+        for (Carrera carrera: coleccionCarreras){
+            if (carrera.getNombre().equals(nombreCarrera)){
+                coleccionCarreras.remove(carrera);
+            }
+        }
+    }
+    public void eliminarEstudiante(Estudiante estudiante){
+        for (Carrera carrera: coleccionCarreras){
+            for(Materia materia: carrera.getColeccionMaterias()){
+                for(Estudiante estudiante1: materia.getColeccionEstudiantes()){
+                    if (estudiante1.equals(estudiante)){
+                        materia.getColeccionEstudiantes().remove(estudiante1);
+                    }
+                }
+            }
+        }
+    }
 }
