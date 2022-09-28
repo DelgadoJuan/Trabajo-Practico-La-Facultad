@@ -1,6 +1,5 @@
 package com.company;
 
-
 import java.util.LinkedList;
 
 public class Carrera {
@@ -9,10 +8,10 @@ public class Carrera {
 
     public Carrera(String nombre){
         this.nombre = nombre;
-        materias = new LinkedList<>();
+        this.materias = new LinkedList<Materia>();
     }
 
-    public getNombre(){
+    public String getNombre(){
         return nombre;
     }
 
@@ -21,9 +20,12 @@ public class Carrera {
     }
 
     public LinkedList<Materia> getMaterias(){
+
         return materias;
     }
+
     public void agregarMateria(Materia materia){
+
         materias.add(materia);
     }
 

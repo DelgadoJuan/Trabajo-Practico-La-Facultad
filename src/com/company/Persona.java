@@ -12,6 +12,11 @@ public abstract class Persona {
         this.apellido = apellido;
         this.legajo = legajo;
     }
+
+    public Persona() {
+
+    }
+
     public String getNombre(){
         return nombre;
     }
