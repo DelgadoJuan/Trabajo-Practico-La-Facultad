@@ -67,6 +67,9 @@ public class Carrera implements Informacion{
         coleccionMaterias.removeIf(materia -> materia.getNombre().equals(nombreMateria));
     }
 
+    public void agregarMateria(Materia materia){
+        coleccionMaterias.add(materia);
+    }
     public void encontrarMateria(String nombreMateria){
         Iterator<Materia> iterator = coleccionMaterias.iterator();
         while (iterator.hasNext()) {

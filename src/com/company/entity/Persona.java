@@ -11,6 +11,9 @@ public abstract class Persona {
         this.legajo = legajo;
     }
 
+    protected Persona() {
+    }
+
     public abstract void modificarDatos();
 
     public String getNombre() {

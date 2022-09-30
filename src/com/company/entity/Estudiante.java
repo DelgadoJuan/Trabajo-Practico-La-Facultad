@@ -10,6 +10,9 @@ public class Estudiante extends Persona {
         super(nombre, apellido, legajo);
     }
 
+    public Estudiante() {
+    }
+
     @Override
     public void modificarDatos() {
         try (Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {
