@@ -26,7 +26,7 @@ public class Materia implements Informacion {
         return titular;
     }
 
-    public void setTitular(Profesor titular) {
+    public void modificarTitular(Profesor titular) {
         this.titular = titular;
     }
 
@@ -38,6 +38,14 @@ public class Materia implements Informacion {
         this.coleccionEstudiantes = coleccionEstudiantes;
     }
 
+    public void agregarEstudiante(Estudiante estudiante) {
+        coleccionEstudiantes.add(estudiante);
+    }
+
+    public void eliminarEstudiante(int legajo) {
+        coleccionEstudiantes.removeIf(estudiante -> estudiante.getLegajo() == legajo);
+    }
+
     @Override
     public int verCantidad() {
         return coleccionEstudiantes.size();
@@ -47,10 +55,13 @@ public class Materia implements Informacion {
     public String listarContenidos() {
         StringBuilder cadena = new StringBuilder();
         coleccionEstudiantes.sort((Comparator.comparing(Estudiante::toString)));
+        System.out.print("Estudiantes de la materia: " + this.nombre + "\n");
+        if (coleccionEstudiantes.isEmpty())
+            return "La materia no tiene ningun estudiante.";
         for (Estudiante estudiante: coleccionEstudiantes) {
-            cadena.append(estudiante.toString()).append("\n");
+            cadena.append("Legajo: ").append(estudiante.getLegajo()).append(", Nombre: ").append(estudiante.getNombre()).append(" ").append(estudiante.getApellido()).append("\n");
         }
-        return String.valueOf(cadena);
+        return cadena.toString();
     }
 
     @Override

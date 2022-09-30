@@ -37,10 +37,13 @@ public class Facultad implements Informacion {
     public String listarContenidos() {
         StringBuilder cadena = new StringBuilder();
         coleccionCarreras.sort((Comparator.comparing(Carrera::toString)));
+        System.out.print("Carreras de la facultad: " + this.nombre + "\n");
+        if (coleccionCarreras.isEmpty())
+            return "La facultad no tiene ninguna carrera asociada.";
         for (Carrera carrera: coleccionCarreras) {
-            cadena.append(carrera.toString()).append("\n");
+            cadena.append(carrera.getNombre()).append("\n");
         }
-        return String.valueOf(cadena);
+        return cadena.toString();
     }
 
     @Override
@@ -55,21 +58,12 @@ public class Facultad implements Informacion {
         coleccionCarreras.add(carrera);
     }
     public void eliminarCarrera(String nombreCarrera){
-
-        for (Carrera carrera: coleccionCarreras){
-            if (carrera.getNombre().equals(nombreCarrera)){
-                coleccionCarreras.remove(carrera);
-            }
-        }
+        coleccionCarreras.removeIf(carrera -> carrera.getNombre().equals(nombreCarrera));
     }
     public void eliminarEstudiante(Estudiante estudiante){
         for (Carrera carrera: coleccionCarreras){
             for(Materia materia: carrera.getColeccionMaterias()){
-                for(Estudiante estudiante1: materia.getColeccionEstudiantes()){
-                    if (estudiante1.equals(estudiante)){
-                        materia.getColeccionEstudiantes().remove(estudiante1);
-                    }
-                }
+                materia.getColeccionEstudiantes().removeIf(estudiante1 -> estudiante1.equals(estudiante));
             }
         }
     }

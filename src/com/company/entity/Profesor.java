@@ -1,10 +1,7 @@
 package com.company.entity;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Profesor extends Persona {
@@ -53,6 +50,10 @@ public class Profesor extends Persona {
         } catch (InputMismatchException e) {
             System.out.println("Ingresó un dato erróneo.");
         }
+    }
+
+    public double calcularSueldo() {
+        return this.basico +((this.basico * 0.1) * this.antiguedad);
     }
 
     public double getBasico() {

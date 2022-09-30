@@ -1,6 +1,7 @@
 package com.company.entity;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,12 +37,22 @@ public class Carrera implements Informacion{
 
     @Override
     public String listarContenidos() {
-        StringBuilder cadena = new StringBuilder();
+        String cadena = "";
         coleccionMaterias.sort((Comparator.comparing(Materia::toString)));
+        System.out.print("Materias de la carrera: " + this.nombre + "\n");
+        if (coleccionMaterias.isEmpty())
+            return "La carrera no tiene ninguna materia asociada.";
         for (Materia materia: coleccionMaterias) {
-            cadena.append(materia.toString()).append("\n");
+            cadena += "Materia: " + materia.getNombre() + "\n";
+            cadena += "Profesor: " + materia.getTitular().getNombre() + " " + materia.getTitular().getApellido() +
+                    ", Legajo: " + materia.getTitular().getLegajo() + ", Básico: " + materia.getTitular().getBasico() +
+                    ", Antiguedad: " + materia.getTitular().getAntiguedad() + "\nEstudiantes:\n";
+            for (Estudiante estudiante: materia.getColeccionEstudiantes()) {
+                cadena += "Legajo: " + estudiante.getLegajo() + ", Nombre: " + estudiante.getNombre() + " " + estudiante.getApellido() + "\n";
+            }
+            cadena += "\n";
         }
-        return String.valueOf(cadena);
+        return cadena;
     }
 
     @Override
@@ -52,16 +63,22 @@ public class Carrera implements Informacion{
                 '}';
     }
 
+    public void eliminarMateria(String nombreMateria){
+        coleccionMaterias.removeIf(materia -> materia.getNombre().equals(nombreMateria));
+    }
+
     public void encontrarMateria(String nombreMateria){
-        for(Materia materia: coleccionMaterias){
-            if (materia.equals(nombreMateria)){
+        Iterator<Materia> iterator = coleccionMaterias.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getNombre().equals(nombreMateria)){
                 Scanner scanner = new Scanner(System.in);
-                System.out.print("Se encontro la materia ¿Desea eliminarla? s/n:");
+                System.out.print("Se encontro la materia ¿Desea eliminarla? s/n: ");
                 String opcion = scanner.nextLine();
                 if (opcion.equals("s")){
-                    coleccionMaterias.remove(materia);
-                    System.out.print("Se eliminó la materia con éxito");
+                    iterator.remove();
+                    System.out.println("Se eliminó la materia con éxito.");
                 }
+                scanner.close();
             }
         }
     }
